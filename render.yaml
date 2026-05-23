@@ -15,9 +15,10 @@ services:
 
   - type: web
     name: banking-chatbot-frontend
-    env: static
-    buildCommand: cd frontend && npm install --include=dev && npm run build
-    staticPublishPath: ./frontend/dist
+    runtime: static
+    rootDir: frontend
+    buildCommand: npm install --include=dev && npm run build
+    staticPublishPath: ./dist
     envVars:
       - key: VITE_API_URL
         fromService:
