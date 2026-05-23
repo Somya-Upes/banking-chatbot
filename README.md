@@ -4,6 +4,9 @@ An AI-powered banking assistant that uses RAG (Retrieval-Augmented Generation) t
 
 🚀 **Live Deployment:** [Click here to use the Chatbot!](https://banking-chatbot-frontend-lyk3.onrender.com)
 
+> ⚠️ **Note on Performance:** This project is hosted on Render's free tier. If the chatbot is inactive for 15 minutes, the server will go to "sleep" to save power. When you send the very first message after a period of inactivity, it might take about 50 seconds to get a reply while the server wakes up. After that, it will be super fast!
+
+
 ## Architecture
 - **Frontend:** React + Vite
 - **Backend:** FastAPI (Python)
