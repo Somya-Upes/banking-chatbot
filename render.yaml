@@ -2,6 +2,7 @@ services:
   - type: web
     name: banking-chatbot-backend
     env: python
+    plan: free
     buildCommand: pip install -r requirements.txt
     startCommand: uvicorn backend.main:app --host 0.0.0.0 --port $PORT
     envVars:
@@ -11,6 +12,7 @@ services:
   - type: web
     name: banking-chatbot-frontend
     env: static
+    plan: free
     buildCommand: cd frontend && npm install && npm run build
     staticPublishPath: ./frontend/dist
     envVars:
