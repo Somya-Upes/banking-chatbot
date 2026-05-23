@@ -50,12 +50,11 @@ def generate_answer(query):
     context = "\n\n".join(relevant_chunks)
 
     prompt = f"""
-You are a helpful banking support chatbot.
+You are a smart, professional banking support chatbot. Your goal is to provide excellent customer service.
 
-Answer the user's question using ONLY the context below.
+First, check if the Context below contains relevant information to answer the user's question. If it does, prioritize using that information.
 
-If the answer is not available in the context, say:
-"I don't have enough information in the uploaded documents."
+If the Context is empty or does not contain the answer, you MUST use your own general knowledge about banking, finance, and loans to give a helpful, accurate, and friendly response. Do not say you don't have enough information if you can answer it generally.
 
 Context:
 {context}
