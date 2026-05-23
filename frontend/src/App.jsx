@@ -4,6 +4,7 @@ import "./App.css";
 function App() {
   const [message, setMessage] = useState("");
   const [chat, setChat] = useState([]);
+  const [isLoading, setIsLoading] = useState(false);
 
   const sendMessage = async () => {
     if (!message.trim()) return;
@@ -14,6 +15,8 @@ function App() {
     };
 
     setChat((prev) => [...prev, userMessage]);
+    setMessage(""); // Clear input immediately
+    setIsLoading(true); // Start loading spinner
 
     try {
       const apiUrl = import.meta.env.VITE_API_URL || "http://127.0.0.1:8000";
@@ -23,7 +26,7 @@ function App() {
           "Content-Type": "application/json",
         },
         body: JSON.stringify({
-          message: message,
+          message: userMessage.text,
           session_id: "frontend-user",
         }),
       });
@@ -41,12 +44,12 @@ function App() {
         ...prev,
         {
           sender: "bot",
-          text: "Error connecting to backend. Please make sure FastAPI is running.",
+          text: "Error connecting to backend. Please make sure the server is awake.",
         },
       ]);
     }
 
-    setMessage("");
+    setIsLoading(false); // Stop loading spinner
   };
 
   return (
@@ -62,6 +65,11 @@ function App() {
             {msg.text}
           </div>
         ))}
+        {isLoading && (
+          <div className="bot-msg" style={{ fontStyle: "italic", opacity: 0.7 }}>
+            Typing... (If server is asleep, this may take up to 50 seconds)
+          </div>
+        )}
       </div>
 
       <div className="input-area">
